@@ -122,8 +122,6 @@ if __name__ == '__main__':
     if NOWHOUR == 02 :
         skipdb="mysql|performance_schema|test"
         getdb = getbakdb(skipdb)
-        #bakdb = (" ").join(getdb)
-        #backupdb(bakdb)
         for db in getdb:
             backupdb(db)
         gzfile()
