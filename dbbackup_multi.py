@@ -6,10 +6,6 @@ import ConfigParser
 import tarfile
 import shutil
 
-def init():
-	global config,nodes
-
-
 #########
 #Get the backup db name
 def getbakdb(skipdb):
@@ -55,7 +51,7 @@ if __name__ == '__main__':
 	
 	config = ConfigParser.ConfigParser()
 	local_path = os.path.abspath(os.path.join(os.path.dirname(__file__)))
-	config_ini = local_path + "/config.ini"
+	config_ini = local_path + "/config_m.ini"
 	config.read(config_ini)
 	nodes = config.sections()
 	
@@ -84,3 +80,4 @@ if __name__ == '__main__':
 		for db in getdb:
 			backupdb(db)
 		gzfile(sc)
+		
