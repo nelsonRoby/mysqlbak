@@ -6,13 +6,13 @@ import ConfigParser
 import tarfile
 import shutil
 
-#########
+
 #Get the backup db name
 def getbakdb(skipdb):
     skipstr = skipdb.split('|')
     skipstr.extend(['Database','information_schema'])
     bakdb = []
-    cmdstr= "mysql -u%s -p'%s' -e 'show databases;' " %(DBUSER,DBPASS)
+    cmdstr= "mysql -h%s -P%s -u%s -p'%s' -e 'show databases;' " %(DBHOST,DBPORT,DBUSER,DBPASS)
     lines = os.popen(cmdstr).readlines()
     for i in lines:
         str1 = i.replace('\n','')
@@ -25,7 +25,7 @@ def getbakdb(skipdb):
 #
 def backupdb(bakdb):
     BAKNAME = BAKPATH + NOWTIME + bakdb + ".sql"
-    cmdstr = "mysqldump -u%s -p'%s' --databases %s  > %s " %(DBUSER,DBPASS,bakdb,BAKNAME)
+    cmdstr = "mysqldump -h%s -P%s -u%s -p'%s' --databases %s  > %s " %(DBHOST,DBPORT,DBUSER,DBPASS,bakdb,BAKNAME)
     os.system(cmdstr)
 
 
@@ -51,7 +51,7 @@ if __name__ == '__main__':
 	
 	config = ConfigParser.ConfigParser()
 	local_path = os.path.abspath(os.path.join(os.path.dirname(__file__)))
-	config_ini = local_path + "/config_m.ini"
+	config_ini = local_path + "/config.ini"
 	config.read(config_ini)
 	nodes = config.sections()
 	
@@ -80,4 +80,3 @@ if __name__ == '__main__':
 		for db in getdb:
 			backupdb(db)
 		gzfile(sc)
-		
