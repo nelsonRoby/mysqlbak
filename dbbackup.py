@@ -120,7 +120,7 @@ def copybinlog():
 
 if __name__ == '__main__':
     if NOWHOUR == 02 :
-        skipdb="mysql|performance_schema|test|IPTV_GW_CHILD"
+        skipdb="mysql|performance_schema|test"
         getdb = getbakdb(skipdb)
         #bakdb = (" ").join(getdb)
         #backupdb(bakdb)
