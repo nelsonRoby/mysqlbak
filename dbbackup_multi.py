@@ -100,7 +100,7 @@ if __name__ == '__main__':
     NOWDATE = time.strftime('%Y%m%d')
     NOWTIME = time.strftime('%Y%m%d-%H%M%S')
     BAKPATH = BAKDIR + NOWDATE + "/"
-    WEEKDAY = int(time.strfitme('%u'))
+    WEEKDAY = int(time.strftime('%u'))
 
     logger = log2f()
     if WEEKDAY == 7:
@@ -109,7 +109,7 @@ if __name__ == '__main__':
     if not os.path.exists(BAKPATH):
         os.makedirs(BAKPATH)
         os.chdir(BAKPATH)
-        logger.info("Creating the folder %s") %(BAKPATH)
+        logger.info("Creating the folder: " + BAKPATH)
     	
     for n in nodes:
         if n == 'global':
